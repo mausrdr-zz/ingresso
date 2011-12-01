@@ -52,8 +52,7 @@ public class PrincipalFrame extends JFrame{
 				
 				@Override
 				public void cadastrarAction() {
-					PrincipalFrame p = PrincipalFrame.this;
-					p.setVisible(false);
+					dispose();
 					new PessoasFrame().setVisible(true);
 				}
 			});
