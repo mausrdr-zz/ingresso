@@ -59,13 +59,16 @@ public class EventoFrame extends JFrame{
 				
 				@Override
 				public void limparAction() {
-					
+					getPanelDataEvento().getNomeField().setText("");
+					getPanelDataEvento().getLocalField().setText("");
+					getPanelDataEvento().getHorarioField().setText("");
+					getPanelDataEvento().getPrecoField().setText("");
+					getPanelDataEvento().getDataField().setText("");
 				}
 				
 				@Override
 				public void cancelAction() {
-					EventoFrame e = EventoFrame.this;
-					e.setVisible(false);
+					dispose();
 					new PrincipalFrame().setVisible(true);
 				}
 			});

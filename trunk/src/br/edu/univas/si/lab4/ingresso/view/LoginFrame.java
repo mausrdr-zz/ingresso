@@ -67,8 +67,7 @@ public class LoginFrame extends JFrame{
 						}
 					}
 					if(verif) {
-						LoginFrame l = LoginFrame.this;
-						l.setVisible(false);
+						dispose();
 						new PessoasFrame().setVisible(true);
 					}
 					else{

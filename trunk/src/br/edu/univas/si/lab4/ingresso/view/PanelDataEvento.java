@@ -131,7 +131,7 @@ public class PanelDataEvento extends JPanel{
 	/**
 	 * @return the nomeField
 	 */
-	private JTextField getNomeField() {
+	public JTextField getNomeField() {
 		if(nomeField == null) {
 			nomeField = new JTextField();
 		}
@@ -140,7 +140,7 @@ public class PanelDataEvento extends JPanel{
 	/**
 	 * @return the localField
 	 */
-	private JTextField getLocalField() {
+	public JTextField getLocalField() {
 		if(localField == null) {
 			localField = new JTextField();
 		}

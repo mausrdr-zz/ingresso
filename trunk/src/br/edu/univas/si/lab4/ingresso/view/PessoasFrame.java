@@ -69,8 +69,7 @@ public class PessoasFrame extends JFrame {
 				
 				@Override
 				public void cancelAction() {
-					PessoasFrame p = PessoasFrame.this;
-					p.setVisible(false);
+					dispose();
 					new PrincipalFrame().setVisible(true);
 				}
 			});
