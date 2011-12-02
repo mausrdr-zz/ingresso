@@ -68,7 +68,7 @@ public class LoginFrame extends JFrame{
 					}
 					if(verif) {
 						dispose();
-						new PessoasFrame().setVisible(true);
+						new AdminFrame().setVisible(true);
 					}
 					else{
 						JOptionPane.showMessageDialog(null, "Login ou senha incorretos!" + s1 + " - " + s2, "Atenção", JOptionPane.ERROR_MESSAGE);
