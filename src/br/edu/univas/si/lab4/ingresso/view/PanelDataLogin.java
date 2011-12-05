@@ -130,7 +130,7 @@ public class PanelDataLogin extends JPanel{
 			loginFieldConstraints = createConstraintsPrototype();
 			loginFieldConstraints.gridx = 1;
 			loginFieldConstraints.gridy = 0;
-			loginFieldConstraints.ipadx = 100;
+			loginFieldConstraints.ipadx = 210;
 		}
 		return loginFieldConstraints;
 	}

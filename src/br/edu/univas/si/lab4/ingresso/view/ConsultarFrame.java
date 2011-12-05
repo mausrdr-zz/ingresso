@@ -6,6 +6,7 @@ package br.edu.univas.si.lab4.ingresso.view;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import br.edu.univas.si.lab4.ingresso.listenner.ConsultarButtonsListenner;
 import br.edu.univas.si.lab4.ingresso.model.PessoasDAO;
@@ -71,10 +72,17 @@ public class ConsultarFrame extends JFrame {
 				@Override
 				public void buscarAction() {
 					String cpf = getPanelData().getCpfBusca();
-					PessoasTO pessoa = new PessoasTO();
-					getPessoasDao().consultaPessoa(cpf, pessoa);
-					dispose();
-					new ResultPessoaFrame(pessoa).setVisible(true);
+					if(!cpf.equals("")){
+						PessoasTO pessoa = new PessoasTO();
+						getPessoasDao().consultaPessoa(cpf, pessoa);
+						dispose();
+						new ResultPessoaFrame(pessoa).setVisible(true);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Informe um número de CPF", "ERRO", JOptionPane.ERROR_MESSAGE);
+						getPanelData().getCpfField().setBorder(new javax.swing.border.LineBorder(java.awt.Color.RED, 1, false));
+						getPanelData().getCpfField().grabFocus();
+					}
 				}
 			});
 		}

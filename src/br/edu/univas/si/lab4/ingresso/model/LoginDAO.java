@@ -15,16 +15,21 @@ import javax.swing.JOptionPane;
  */
 public class LoginDAO extends ConnectDB {
 	
-	public boolean getLogin(String login, String senha) {
-		String sql = "SELECT * FROM usuarios WHERE usuario LIKE '" + login +"' AND senha LIKE '" + senha + "';";
+	public boolean getLogin(Login login) {
+		String sql = "SELECT * FROM usuarios WHERE usuario LIKE '" + login.getLogin() +"' AND senha LIKE '" + login.getSenha() + "';";
 		boolean verif = false;
-		
+				
 		Statement statement;
 		try {
 			statement = getStatement();
 			
 			ResultSet result = statement.executeQuery(sql);
-			verif = result.next();	
+			
+			
+			while(result.next()) {
+				login.setTipo(result.getInt("tipo"));
+				verif = true;
+			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 			return verif;
