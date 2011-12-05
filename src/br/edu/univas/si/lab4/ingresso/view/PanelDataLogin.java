@@ -6,6 +6,8 @@ package br.edu.univas.si.lab4.ingresso.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,8 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
-import br.edu.univas.si.lab4.ingresso.model.Login;
 
 /**
  * @author mauro
@@ -151,19 +151,33 @@ public class PanelDataLogin extends JPanel{
 		return loginFrame;
 	}
 	
-	public char [] getInputSenha() {
-		char [] input = getSenhaField().getPassword();
-		return input;
+	public String getInputSenha() {
+		char[] input = getSenhaField().getPassword();
+		String senha = "";
+		for(int i=0; i < input.length; i++) {
+			senha += input[i];
+		}
+		return senha;
 	}
 	
-	public String getLogin() {
-		Login l = new Login();
-		String login = l.getLogin();
-		return login;
+	public String stringHexa(byte[] bytes) {
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < bytes.length; i++) {
+			int parteAlta = ((bytes[i] >> 4) & 0xf) << 4;
+			int parteBaixa = bytes[i] & 0xf;
+			if (parteAlta == 0) s.append('0');
+			s.append(Integer.toHexString(parteAlta | parteBaixa));
+		}
+		return s.toString();
 	}
-	public char [] getSenha() {
-		Login l = new Login();
-		char [] senha = l.getSenha();
-		return senha;
+	
+	public byte[] gerarHash(String frase, String algoritmo) {
+		try {
+			MessageDigest md = MessageDigest.getInstance(algoritmo);
+			md.update(frase.getBytes());
+			return md.digest();
+		} catch (NoSuchAlgorithmException e) {
+			return null;
+		}
 	}
 }

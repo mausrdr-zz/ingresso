@@ -9,8 +9,8 @@ package br.edu.univas.si.lab4.ingresso.model;
  */
 public class Login {
 	
-	private String login = "admin";
-	private char [] senha = { 'a', 'd', 'm', 'i', 'n'};
+	private String login;
+	private String senha;
 	
 	/**
 	 * @return the login
@@ -27,13 +27,13 @@ public class Login {
 	/**
 	 * @return the senha
 	 */
-	public char[] getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 	/**
 	 * @param senha the senha to set
 	 */
-	public void setSenha(char[] senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 }
