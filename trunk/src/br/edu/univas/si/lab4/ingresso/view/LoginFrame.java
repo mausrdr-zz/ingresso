@@ -4,12 +4,12 @@
 package br.edu.univas.si.lab4.ingresso.view;
 
 import java.awt.BorderLayout;
-import java.util.Arrays;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import br.edu.univas.si.lab4.ingresso.listenner.LoginButtonsListenner;
+import br.edu.univas.si.lab4.ingresso.model.Login;
+import br.edu.univas.si.lab4.ingresso.model.LoginDAO;
 
 /**
  * @author mauro
@@ -20,6 +20,7 @@ public class LoginFrame extends JFrame{
 	
 	private PanelDataLogin panelDataLogin;
 	private PanelButtonsLogin panelButtonsLogin;
+	private LoginDAO loginDao;
 	
 	public LoginFrame() {
 		super("Ingreso - Login");
@@ -42,6 +43,16 @@ public class LoginFrame extends JFrame{
 		}
 		return panelDataLogin;
 	}
+	
+	/**
+	 * @return the loginDao
+	 */
+	private LoginDAO getLoginDao() {
+		if(loginDao == null) {
+			loginDao = new LoginDAO();
+		}
+		return loginDao;
+	}
 
 	/**
 	 * @return the panelButtonsLogin
@@ -52,26 +63,20 @@ public class LoginFrame extends JFrame{
 			panelButtonsLogin.addListenner(new LoginButtonsListenner() {
 				@Override
 				public void okAction() {
-					String s1 = getPanelDataLogin().getLoginFrame();
-					char [] input = getPanelDataLogin().getInputSenha();
-					String s2 = getPanelDataLogin().getLogin();
-					char [] senha = getPanelDataLogin().getSenha();
+					Login l = new Login();
+					l.setLogin(getPanelDataLogin().getLoginFrame());
+					l.setSenha(getPanelDataLogin().getInputSenha());
 					boolean verif = false;
-					for(int i=0; i < 2; i++) {
-						if(s1.equals(s2) && Arrays.equals(input, senha)) {
-							verif = true;
-						}
-						else {
-							verif = false;
-							break;
-						}
-					}
+					
+					l.setSenha(getPanelDataLogin().stringHexa(getPanelDataLogin().gerarHash(l.getSenha(), "SHA-256")));
+					verif = getLoginDao().getLogin(l.getLogin(), l.getSenha());
+					
 					if(verif) {
 						dispose();
 						new AdminFrame().setVisible(true);
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "Login ou senha incorretos!" + s1 + " - " + s2, "Atenção", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Login ou senha incorretos!" + l.getLogin() + " - " + l.getSenha(), "Atenção", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				
