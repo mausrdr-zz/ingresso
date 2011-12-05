@@ -11,6 +11,7 @@ public class Login {
 	
 	private String login;
 	private String senha;
+	private int tipo;
 	
 	/**
 	 * @return the login
@@ -36,4 +37,16 @@ public class Login {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	/**
+	 * @return the tipo
+	 */
+	public int getTipo() {
+		return tipo;
+	}
+	/**
+	 * @param tipo the tipo to set
+	 */
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}	
 }

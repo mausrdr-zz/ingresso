@@ -63,20 +63,25 @@ public class LoginFrame extends JFrame{
 			panelButtonsLogin.addListenner(new LoginButtonsListenner() {
 				@Override
 				public void okAction() {
-					Login l = new Login();
-					l.setLogin(getPanelDataLogin().getLoginFrame());
-					l.setSenha(getPanelDataLogin().getInputSenha());
+					Login login = new Login();
+					login.setLogin(getPanelDataLogin().getLoginFrame());
+					login.setSenha(getPanelDataLogin().getInputSenha());
 					boolean verif = false;
 					
-					l.setSenha(getPanelDataLogin().stringHexa(getPanelDataLogin().gerarHash(l.getSenha(), "SHA-256")));
-					verif = getLoginDao().getLogin(l.getLogin(), l.getSenha());
+					login.setSenha(getPanelDataLogin().stringHexa(getPanelDataLogin().gerarHash(login.getSenha(), "SHA-256")));
+					verif = getLoginDao().getLogin(login);
 					
 					if(verif) {
-						dispose();
-						new AdminFrame().setVisible(true);
+						int tipo = login.getTipo();
+						switch(tipo){
+							case 1:
+								dispose();
+								new AdminFrame().setVisible(true);
+								break;
+						}
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "Login ou senha incorretos!" + l.getLogin() + " - " + l.getSenha(), "Atenção", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Login ou senha incorretos!" + login.getLogin() + " - " + login.getSenha(), "Atenção", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				
