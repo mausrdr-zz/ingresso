@@ -5,6 +5,7 @@ package br.edu.univas.si.lab4.ingresso.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -45,7 +46,7 @@ public abstract class ConnectDB {
 
 	protected Statement getStatement() throws SQLException {
 		if(statement == null) {
-			statement = getConnection().createStatement();
+			statement = getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		}
 		return statement;
 	}
