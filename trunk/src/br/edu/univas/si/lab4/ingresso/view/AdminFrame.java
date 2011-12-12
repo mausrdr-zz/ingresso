@@ -28,7 +28,7 @@ public class AdminFrame extends JFrame {
 	private void initialize() {
 		add(getPanelButtons(), BorderLayout.CENTER);
 	}
-
+	
 	/**
 	 * @return the panelButtons
 	 */
@@ -47,6 +47,12 @@ public class AdminFrame extends JFrame {
 				public void consultarAction() {
 					dispose();
 					new ConsultarFrame().setVisible(true);
+				}
+
+				@Override
+				public void pedidoAction() {
+					dispose();
+					new OpcaoPedidoFrame().setVisible(true);
 				}
 			});
 		}

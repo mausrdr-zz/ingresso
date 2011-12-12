@@ -20,6 +20,7 @@ public class PanelButtonsAdmin extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private JButton consultarButton;
+	private JButton pedidoButton;
 	private JButton sairButton;
 	
 	private ArrayList<AdminButtonsListenner> listenners = new ArrayList<AdminButtonsListenner>();
@@ -30,6 +31,7 @@ public class PanelButtonsAdmin extends JPanel {
 
 	private void initialize() {
 		add(getConsultarButton());
+		add(getPedidoButton());
 		add(getSairButton());
 	}
 
@@ -39,7 +41,7 @@ public class PanelButtonsAdmin extends JPanel {
 	public JButton getConsultarButton() {
 		if(consultarButton == null) {
 			consultarButton = new JButton();
-			consultarButton.setText("buscar");
+			consultarButton.setText("Buscar");
 			consultarButton.addActionListener(new ActionListener() {
 				
 				@Override
@@ -54,12 +56,32 @@ public class PanelButtonsAdmin extends JPanel {
 	}
 		
 	/**
+	 * @return the pedidoButton
+	 */
+	public JButton getPedidoButton() {
+		if(pedidoButton == null) {
+			pedidoButton = new JButton();
+			pedidoButton.setText("Pedidos de Eventos");
+			pedidoButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					for(AdminButtonsListenner listenner : listenners) {
+						listenner.pedidoAction();
+					}
+				}
+			});
+		}
+		return pedidoButton;
+	}
+
+	/**
 	 * @return the sairButton
 	 */
 	public JButton getSairButton() {
 		if(sairButton == null) {
 			sairButton = new JButton();
-			sairButton.setText("sair");
+			sairButton.setText("Sair");
 			sairButton.addActionListener(new ActionListener() {
 				
 				@Override
